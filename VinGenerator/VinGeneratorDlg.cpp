@@ -68,7 +68,7 @@ CVinGeneratorDlg::CVinGeneratorDlg(CWnd* pParent /*=NULL*/)
 	m_count = 0;
 	//}}AFX_DATA_INIT
 	// Note that LoadIcon does not require a subsequent DestroyIcon in Win32
-	m_hIcon = AfxGetApp()->LoadIcon(IDI_ICON2);
+	m_hIcon = AfxGetApp()->LoadIcon(IDI_ICON1);
 }
 
 void CVinGeneratorDlg::DoDataExchange(CDataExchange* pDX)

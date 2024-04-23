@@ -49,7 +49,7 @@ void mapWeight(BitWeight* bitWeight)
 	bitWeight[13].id ='P';
 	bitWeight[13].weight = 7;
 	bitWeight[14].id ='R';
-	bitWeight[14].weight = 8;
+	bitWeight[14].weight = 9;
 	bitWeight[15].id ='S';
 	bitWeight[15].weight = 2;
 	bitWeight[16].id ='T';
@@ -118,7 +118,7 @@ int findWeight(BitWeight* bitWeight, char pos)
 	return -1;
 }
 
-void getPostion(char* positions, BitWeight* bitWeight, char* buff)
+void getPostion(int* positions, BitWeight* bitWeight, char* buff)
 {
 	
 	// 计算每个位置的权位
@@ -138,18 +138,18 @@ void getPostion(char* positions, BitWeight* bitWeight, char* buff)
 }
 
 
-int getBitWeight(char* positions)
+int getBitWeight(int* positions)
 {
 	int sum = 0;
 	for(int i=0; i<17; i++)
 	{
 		if(i < 7)
 		{
-			sum += int(positions[i]) * (8-1);
+			sum += positions[i] * (8- i);
 		}
 		else if(i == 7)
 		{
-			sum += int(positions[i]) * (i + 3);
+			sum += positions[i] * (i + 3);
 		}
 		else if(i == 8)
 		{
@@ -157,7 +157,7 @@ int getBitWeight(char* positions)
 		}
 		else
 		{
-			sum += int(positions[i]) * (9 - (i - 9));
+			sum += positions[i] * (9 - (i - 9));
 		}
 	}
 	return sum;
@@ -174,7 +174,7 @@ char getVin9(int sum)
 	else
 	{
 		pos9 = '0' + (sum % 11);	
-	}
+	}	
 	return pos9;
 }
 
@@ -184,12 +184,14 @@ void generVin(char* buff)
 	// 构建权位
 	mapWeight(bitWeight);
 	// 随机17位字符串	
-	generate_random_string(buff, 17);
+	generate_random_string(buff, 17);	
 	// 构建每个位置的权位
-	char positions[17] = {0};
-	getPostion(positions, bitWeight, buff);
+	int positions[17] = {0};
+	getPostion(positions, bitWeight, buff);	
+	
 	// 计算第九位权位
 	int sum = getBitWeight(positions); 
-	buff[8] = getVin9(sum);
+	
+	buff[8] = getVin9(sum);		
 	return;
 }
